@@ -24,3 +24,4 @@ dist
 gulp-es6-module-template.tar
 project/target
 gulp-es6-webapp-template.tar
+gulp-es6-web-app-template.tar
