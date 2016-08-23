@@ -1,0 +1,11 @@
+import {assert} from 'chai';
+import {wrap} from '../src/js/sub/wrap';
+
+describe('wrap', () => {
+  it('should be imported', () => {
+    assert.isDefined(wrap);
+  });
+  it('should wrap string', () => {
+    assert.equal( wrap('x','a'), 'axa');
+  });
+});

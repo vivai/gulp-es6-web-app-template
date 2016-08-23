@@ -1,0 +1,4 @@
+// @flow
+import {hello} from './hello';
+
+console.log(hello('World'));

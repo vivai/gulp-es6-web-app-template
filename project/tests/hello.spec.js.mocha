@@ -1,0 +1,13 @@
+import {assert} from 'chai';
+import {hello} from '../src/js/hello';
+
+describe('hello', () => {
+  it('should be imported', () => {
+    assert.isDefined(hello);
+  });
+  /*
+  it('should say hello', () => {
+    assert.equal( hello('world'), '"Hello, world!"');
+  });
+  */
+});
