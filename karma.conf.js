@@ -1,6 +1,8 @@
 // Karma configuration
 'use strict'
 
+/* eslint-disable no-magic-numbers */
+
 module.exports = function (config) {
   config.set({
 

@@ -1,7 +1,5 @@
-// Gulo: ES6 WebApp
-// - ECMAScript2015 - ES6
-// - Babel
-// - Sass
+/* eslint-disable no-magic-numbers */
+
 //------------------------------------------------------------------------------
 // modules
 //
@@ -15,6 +13,7 @@ const gulp = require('gulp'),
       eslint = require('gulp-eslint'),
       flow = require('gulp-flowtype'),
       del = require('del'),
+      path = require('path'),
       karma = require('karma'),
       server = require( 'gulp-develop-server' ),
       util = require('gulp-util'),
@@ -30,7 +29,6 @@ const project = './project',
       dev = `${project}/dev`,
       paths = {
         src: {
-          lib: `${src}/lib/**/*.js`,
           js: `${src}/js/**/*.js`,
           html: `${src}/html/**/*.html`,
           specs: `${tests}/**/*.spec.js`,
@@ -40,6 +38,9 @@ const project = './project',
             js: `${src}/js/main.js`,
             scss: `${src}/css/main.scss`
           }
+        },
+        lib: {
+          js: `${project}/lib/**/*.js`
         },
         target: {
           css: `${target}/www/css`,
@@ -64,11 +65,9 @@ const project = './project',
             `${target}/www` // docuemnt root
           ]
         },
-        flow: {
-          declarations: paths.src.lib
-        },
+        flow: { },
         karma: {
-          configFile: 'karma.conf.js'
+          configFile: path.join(__dirname, 'karma.conf.js')
         }
       };
 
@@ -90,7 +89,7 @@ function isArray(x) { return (!!x) && (x.constructor === Array); }
 function isObject(x) { return (!!x) && (x.constructor === Object); }
 
 function clear(done) {
-  process.stdout.write("\u001b[2J\u001b[0;0H");
+  process.stdout.write('\u001b[2J\u001b[0;0H');
   if(done) done();
 }
 
@@ -245,7 +244,7 @@ function copyCss() {
 
 gulp.task('copy:lib', copyLib);
 function copyLib() {
-  return gulp.src(paths.src.lib)
+  return gulp.src(paths.lib.js)
     .pipe(gulp.dest(paths.target.lib))
     .pipe(livereload());
 }
@@ -260,7 +259,7 @@ function watch(done) {
   gulp.watch(paths.src.html, copyHtml);
   gulp.watch(paths.src.css, copyCss);
   gulp.watch(paths.src.scss, buildSass);
-  gulp.watch(paths.src.lib, copyLib);
+  gulp.watch(paths.lib.js, copyLib);
   done();
 }
 
